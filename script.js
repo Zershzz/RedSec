@@ -1,44 +1,47 @@
 // === HEXAGON BACKGROUND ===
 const canvas = document.getElementById('hex-canvas');
-const ctx = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-function drawHexagon(x, y, size) {
-    ctx.beginPath();
-    for (let i = 0; i < 6; i++) {
-        const angle = (Math.PI / 3) * i;
-        const px = x + size * Math.cos(angle);
-        const py = y + size * Math.sin(angle);
-        if (i === 0) ctx.moveTo(px, py);
-        else ctx.lineTo(px, py);
-    }
-    ctx.closePath();
-    ctx.strokeStyle = 'rgba(255, 0, 0, 0.05)';
-    ctx.stroke();
-}
-
-function drawHexGrid() {
-    const size = 50;
-    const h = size * Math.sqrt(3);
-    
-    for (let row = 0; row < canvas.height / h + 2; row++) {
-        for (let col = 0; col < canvas.width / (size * 1.5) + 2; col++) {
-            const x = col * size * 1.5;
-            const y = row * h + (col % 2 === 1 ? h / 2 : 0);
-            drawHexagon(x, y, size);
-        }
-    }
-}
-
-drawHexGrid();
-
-window.addEventListener('resize', () => {
+// Only initialize canvas if it exists
+if (canvas) {
+    const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
+    function drawHexagon(x, y, size) {
+        ctx.beginPath();
+        for (let i = 0; i < 6; i++) {
+            const angle = (Math.PI / 3) * i;
+            const px = x + size * Math.cos(angle);
+            const py = y + size * Math.sin(angle);
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
+        }
+        ctx.closePath();
+        ctx.strokeStyle = 'rgba(255, 0, 0, 0.05)';
+        ctx.stroke();
+    }
+
+    function drawHexGrid() {
+        const size = 50;
+        const h = size * Math.sqrt(3);
+        
+        for (let row = 0; row < canvas.height / h + 2; row++) {
+            for (let col = 0; col < canvas.width / (size * 1.5) + 2; col++) {
+                const x = col * size * 1.5;
+                const y = row * h + (col % 2 === 1 ? h / 2 : 0);
+                drawHexagon(x, y, size);
+            }
+        }
+    }
+
     drawHexGrid();
-});
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        drawHexGrid();
+    });
+}
 
 // === REAL TIME CLOCK ===
 function updateTime() {
