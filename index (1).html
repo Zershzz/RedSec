@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RedSec - Elite Cybersecurity Operations">
+    <title>REDSEC // CYBER OPERATIONS</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Russo+One&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Scanline Effect -->
+    <div class="scanlines"></div>
+    <div class="noise"></div>
+
+    <!-- Hexagon Background Pattern -->
+    <canvas id="hex-canvas"></canvas>
+
+    <!-- Top Status Bar -->
+    <div class="status-bar">
+        <div class="status-item">
+            <span class="status-label">SYSTEM</span>
+            <span class="status-value online">ONLINE</span>
+        </div>
+        <div class="status-item">
+            <span class="status-label">THREAT LEVEL</span>
+            <span class="status-value">ELEVATED</span>
+        </div>
+        <div class="status-item">
+            <span class="status-label">ENCRYPTION</span>
+            <span class="status-value">AES-256</span>
+        </div>
+        <div class="status-item timestamp">
+            <span id="current-time"></span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo-container">
+                <div class="logo-hex"></div>
+                <div class="logo">
+                    <span class="logo-red">RED</span><span class="logo-sec">SEC</span>
+                    <div class="logo-subtitle">CYBER OPERATIONS</div>
+                </div>
+            </div>
+            
+            <div class="nav-links">
+                <a href="#home" class="nav-link active" data-section="home">
+                    <span class="nav-icon">◆</span> INÍCIO
+                </a>
+                <a href="#arsenal" class="nav-link" data-section="arsenal">
+                    <span class="nav-icon">◆</span> ARSENAL
+                </a>
+                <a href="#operations" class="nav-link" data-section="operations">
+                    <span class="nav-icon">◆</span> OPERAÇÕES
+                </a>
+                <a href="#intel" class="nav-link" data-section="intel">
+                    <span class="nav-icon">◆</span> INTEL
+                </a>
+                <a href="#contact" class="nav-link" data-section="contact">
+                    <span class="nav-icon">◆</span> CONTATO
+                </a>
+            </div>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="section hero active">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <div class="classified-tag">
+                    <span class="classified-badge">CLASSIFIED</span>
+                    <span class="clearance-level">CLEARANCE: TOP SECRET</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    <span class="title-line-1">DEFENSIVE</span>
+                    <span class="title-line-2">CYBER</span>
+                    <span class="title-line-3">WARFARE</span>
+                </h1>
+
+                <p class="hero-description">
+                    Operações de segurança cibernética de nível militar para proteção 
+                    de infraestrutura crítica empresarial. Detecção, neutralização e 
+                    eliminação de ameaças avançadas persistentes.
+                </p>
+
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="scrollToSection('arsenal')">
+                        <span class="btn-icon">▶</span> ACESSAR ARSENAL
+                    </button>
+                    <button class="btn btn-secondary" onclick="scrollToSection('operations')">
+                        <span class="btn-icon">◉</span> VER OPERAÇÕES
+                    </button>
+                </div>
+
+                <div class="threat-meter">
+                    <div class="meter-label">TAXA DE AMEAÇAS NEUTRALIZADAS</div>
+                    <div class="meter-bar">
+                        <div class="meter-fill" data-value="98"></div>
+                    </div>
+                    <div class="meter-value">98.7%</div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="radar-container">
+                    <div class="radar-circle radar-1"></div>
+                    <div class="radar-circle radar-2"></div>
+                    <div class="radar-circle radar-3"></div>
+                    <div class="radar-sweep"></div>
+                    <div class="radar-center"></div>
+                    <div class="radar-blip" style="top: 30%; left: 40%;"></div>
+                    <div class="radar-blip" style="top: 60%; left: 70%;"></div>
+                    <div class="radar-blip" style="top: 45%; left: 25%;"></div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-number" data-count="847">0</div>
+                        <div class="stat-label">EMPRESAS<br>PROTEGIDAS</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" data-count="24">0</div>
+                        <div class="stat-label">MONITORAMENTO<br>24/7</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number" data-count="99.8">0</div>
+                        <div class="stat-label">UPTIME<br>GARANTIDO</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Arsenal Section (Tools) -->
+    <section id="arsenal" class="section arsenal">
+        <div class="section-header">
+            <div class="section-tag">TACTICAL TOOLKIT</div>
+            <h2 class="section-title">ARSENAL DISPONÍVEL</h2>
+            <p class="section-description">
+                Ferramentas de penetração e defesa desenvolvidas por nosso time de operações especiais.
+                Acesso restrito a profissionais credenciados.
+            </p>
+        </div>
+
+        <div class="arsenal-controls">
+            <div class="search-container">
+                <input type="text" id="arsenal-search" class="search-input" placeholder="BUSCAR FERRAMENTA...">
+                <span class="search-indicator"></span>
+            </div>
+
+            <div class="filter-grid">
+                <button class="filter-chip active" data-filter="all">
+                    <span class="chip-icon">●</span> TODAS
+                </button>
+                <button class="filter-chip" data-filter="network">
+                    <span class="chip-icon">●</span> NETWORK
+                </button>
+                <button class="filter-chip" data-filter="web">
+                    <span class="chip-icon">●</span> WEB
+                </button>
+                <button class="filter-chip" data-filter="forensics">
+                    <span class="chip-icon">●</span> FORENSICS
+                </button>
+                <button class="filter-chip" data-filter="exploit">
+                    <span class="chip-icon">●</span> EXPLOIT
+                </button>
+            </div>
+        </div>
+
+        <div class="arsenal-grid" id="arsenal-grid">
+            <!-- Tools loaded via JS from database -->
+        </div>
+    </section>
+
+    <!-- Operations Section (Services) -->
+    <section id="operations" class="section operations">
+        <div class="section-header">
+            <div class="section-tag">MISSION TYPES</div>
+            <h2 class="section-title">OPERAÇÕES DISPONÍVEIS</h2>
+        </div>
+
+        <div class="operations-grid">
+            <div class="operation-card">
+                <div class="op-header">
+                    <div class="op-icon">🛡️</div>
+                    <div class="op-code">OP-001</div>
+                </div>
+                <h3>PENETRATION TESTING</h3>
+                <p>Simulação de ataques reais para identificação de vulnerabilidades críticas antes que adversários as explorem.</p>
+                <div class="op-features">
+                    <span class="feature-tag">Black Box</span>
+                    <span class="feature-tag">Gray Box</span>
+                    <span class="feature-tag">White Box</span>
+                </div>
+            </div>
+
+            <div class="operation-card">
+                <div class="op-header">
+                    <div class="op-icon">👁️</div>
+                    <div class="op-code">OP-002</div>
+                </div>
+                <h3>SOC 24/7</h3>
+                <p>Centro de Operações de Segurança com monitoramento contínuo e resposta imediata a incidentes.</p>
+                <div class="op-features">
+                    <span class="feature-tag">Real-time</span>
+                    <span class="feature-tag">SIEM</span>
+                    <span class="feature-tag">Threat Intel</span>
+                </div>
+            </div>
+
+            <div class="operation-card">
+                <div class="op-header">
+                    <div class="op-icon">⚔️</div>
+                    <div class="op-code">OP-003</div>
+                </div>
+                <h3>RED TEAM OPS</h3>
+                <p>Operações ofensivas simulando APTs (Advanced Persistent Threats) para testar capacidade de defesa.</p>
+                <div class="op-features">
+                    <span class="feature-tag">APT Simulation</span>
+                    <span class="feature-tag">Social Eng</span>
+                    <span class="feature-tag">Physical</span>
+                </div>
+            </div>
+
+            <div class="operation-card">
+                <div class="op-header">
+                    <div class="op-icon">🔬</div>
+                    <div class="op-code">OP-004</div>
+                </div>
+                <h3>DIGITAL FORENSICS</h3>
+                <p>Investigação forense digital profunda para análise pós-incidente e coleta de evidências.</p>
+                <div class="op-features">
+                    <span class="feature-tag">Disk Analysis</span>
+                    <span class="feature-tag">Memory Dump</span>
+                    <span class="feature-tag">Network</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Intel Section (About) -->
+    <section id="intel" class="section intel">
+        <div class="intel-container">
+            <div class="intel-content">
+                <div class="section-tag">INTELLIGENCE BRIEFING</div>
+                <h2 class="section-title">QUEM SOMOS</h2>
+                
+                <p class="intel-text">
+                    <strong>REDSEC</strong> é uma unidade de operações cibernéticas especializada 
+                    em defesa e contramedidas avançadas. Fundada por veteranos de segurança 
+                    ofensiva e defensiva, operamos em nível militar para proteger 
+                    infraestruturas críticas empresariais.
+                </p>
+
+                <p class="intel-text">
+                    Nossa equipe é composta por especialistas certificados em múltiplas 
+                    disciplinas de segurança, com experiência comprovada em neutralização 
+                    de ameaças APT, ransomware e ataques zero-day.
+                </p>
+
+                <div class="clearance-badges">
+                    <div class="badge">OSCP</div>
+                    <div class="badge">OSCE</div>
+                    <div class="badge">OSWE</div>
+                    <div class="badge">GPEN</div>
+                    <div class="badge">CISSP</div>
+                    <div class="badge">CEH</div>
+                </div>
+
+                <div class="intel-stats">
+                    <div class="intel-stat">
+                        <div class="stat-key">ANOS OPERACIONAIS</div>
+                        <div class="stat-val">12+</div>
+                    </div>
+                    <div class="intel-stat">
+                        <div class="stat-key">VULNERABILIDADES</div>
+                        <div class="stat-val">25,000+</div>
+                    </div>
+                    <div class="intel-stat">
+                        <div class="stat-key">INCIDENTES RESOLVIDOS</div>
+                        <div class="stat-val">100%</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="intel-visual">
+                <div class="classified-doc">
+                    <div class="doc-header">
+                        <span class="doc-stamp">TOP SECRET</span>
+                        <span class="doc-code">REDSEC-2024-CLASSIFIED</span>
+                    </div>
+                    <div class="doc-content">
+                        <div class="doc-line"><span class="redacted">████████████</span> CYBER DEFENSE UNIT</div>
+                        <div class="doc-line">THREAT LEVEL: <span class="highlight">CRITICAL</span></div>
+                        <div class="doc-line">OPERATIONAL STATUS: <span class="highlight">ACTIVE</span></div>
+                        <div class="doc-line"></div>
+                        <div class="doc-line">MISSION PARAMETERS:</div>
+                        <div class="doc-line">→ Neutralize APT threats</div>
+                        <div class="doc-line">→ Secure critical infrastructure</div>
+                        <div class="doc-line">→ <span class="redacted">█████████████████</span></div>
+                        <div class="doc-line"></div>
+                        <div class="doc-line">AUTHORIZATION: <span class="redacted">████████</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="contact-container">
+            <div class="section-header">
+                <div class="section-tag">SECURE CHANNEL</div>
+                <h2 class="section-title">ESTABELECER CONTATO</h2>
+                <p class="section-description">
+                    Comunicação criptografada end-to-end. Resposta garantida em 24h.
+                </p>
+            </div>
+
+            <form class="contact-form" id="contact-form" netlify>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>IDENTIFICAÇÃO</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>EMAIL SEGURO</label>
+                        <input type="email" name="email" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>ORGANIZAÇÃO</label>
+                    <input type="text" name="company">
+                </div>
+
+                <div class="form-group">
+                    <label>TIPO DE OPERAÇÃO</label>
+                    <select name="operation">
+                        <option>Pentest</option>
+                        <option>SOC 24/7</option>
+                        <option>Red Team</option>
+                        <option>Forensics</option>
+                        <option>Consultoria</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>MENSAGEM CLASSIFICADA</label>
+                    <textarea name="message" rows="5" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">
+                    <span class="btn-icon">▶</span> ENVIAR TRANSMISSÃO
+                </button>
+            </form>
+
+            <div class="contact-info">
+                <div class="info-block">
+                    <div class="info-label">EMAIL CRIPTOGRAFADO</div>
+                    <div class="info-value">ops@redsec.mil</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">LINHA DIRETA</div>
+                    <div class="info-value">+55 11 9999-9999</div>
+                </div>
+                <div class="info-block">
+                    <div class="info-label">LOCALIZAÇÃO</div>
+                    <div class="info-value">São Paulo, Brasil</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-red">RED</span><span class="logo-sec">SEC</span>
+                <p>ELITE CYBER OPERATIONS // EST. 2012</p>
+            </div>
+            <div class="footer-links">
+                <a href="#home">Início</a>
+                <a href="#arsenal">Arsenal</a>
+                <a href="#operations">Operações</a>
+                <a href="#intel">Intel</a>
+                <a href="#contact">Contato</a>
+            </div>
+            <div class="footer-legal">
+                <p>&copy; 2024 REDSEC. All operations classified.</p>
+                <p class="konami-hint" onclick="activateKonami()">Think you can find the hidden access point?</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
