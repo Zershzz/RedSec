@@ -12,12 +12,36 @@ const errorMessage = document.getElementById('error-message');
 const logoutBtn = document.getElementById('logout-btn');
 const currentUserSpan = document.getElementById('current-user');
 
+// === SHOW DASHBOARD FUNCTION (must be defined before use) ===
+function showDashboard(username) {
+    console.log('[ADMIN] Showing dashboard for:', username);
+    console.log('[ADMIN] Elements check:', {
+        adminLogin: !!adminLogin,
+        adminDashboard: !!adminDashboard,
+        currentUserSpan: !!currentUserSpan
+    });
+    
+    if (adminLogin) adminLogin.style.display = 'none';
+    if (adminDashboard) adminDashboard.classList.add('active');
+    if (currentUserSpan) currentUserSpan.textContent = username.toUpperCase();
+    
+    updateDashboardStats();
+    loadToolsTable();
+    
+    console.log('[ADMIN] Dashboard should be visible now');
+}
+
 // Check if already logged in
 const isLoggedIn = sessionStorage.getItem('admin_access') === 'granted';
 const currentUser = sessionStorage.getItem('admin_user');
 
+console.log('[ADMIN] Page loaded. Login status:', isLoggedIn, 'User:', currentUser);
+
 if (isLoggedIn && currentUser) {
+    console.log('[ADMIN] User already logged in, showing dashboard');
     showDashboard(currentUser);
+} else {
+    console.log('[ADMIN] Not logged in, showing login form');
 }
 
 // Login handler
@@ -28,12 +52,17 @@ loginForm?.addEventListener('submit', (e) => {
     const password = document.getElementById('password').value;
     
     if (ADMIN_CREDENTIALS[username] === password) {
+        // Save session
         sessionStorage.setItem('admin_access', 'granted');
         sessionStorage.setItem('admin_user', username);
-        showDashboard(username);
         
         // Glitch effect
         document.body.style.animation = 'glitch 0.3s';
+        
+        // Show dashboard after animation
+        setTimeout(() => {
+            showDashboard(username);
+        }, 300);
     } else {
         errorMessage.style.display = 'block';
         document.body.style.animation = 'shake 0.5s';
@@ -53,14 +82,6 @@ logoutBtn?.addEventListener('click', () => {
     adminDashboard.classList.remove('active');
     adminLogin.style.display = 'block';
 });
-
-function showDashboard(username) {
-    adminLogin.style.display = 'none';
-    adminDashboard.classList.add('active');
-    currentUserSpan.textContent = username.toUpperCase();
-    updateDashboardStats();
-    loadToolsTable();
-}
 
 // Add shake animation
 const shakeStyle = document.createElement('style');
